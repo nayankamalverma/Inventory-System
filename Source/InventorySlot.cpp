@@ -3,9 +3,9 @@
 namespace Inventory{
     InventorySlot::InventorySlot(std::shared_ptr<Item::Item>& item, int quantity): item(std::move(item)), quantity(quantity), maxQuantity(item->getMaxStack()){}
 
-    const Item::Item* InventorySlot::getItem() const
+    const std::shared_ptr<Item::Item>& InventorySlot::getItem() const
     {
-        return item.get();
+        return item;
     }
 
     int InventorySlot::getQuantity() const

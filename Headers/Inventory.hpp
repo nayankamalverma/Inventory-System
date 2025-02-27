@@ -30,6 +30,6 @@ namespace Inventory {
             WeightStage getWeightStage() const;
             double getCurrentWeight() const;
             double getMaxWeight() const;
-            std::vector<int> getItemByType(Item::ItemType type) const;
+            std::vector<std::shared_ptr<Item::Item>> getItemByType(Item::ItemType type) const;
     };
 }

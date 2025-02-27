@@ -59,8 +59,10 @@ namespace Inventory{
     void Inventory::updateWeightStage() {
         if (currentWeight >= maxWeight) {
             weightStage = WeightStage::OVERLOADED;
+            //we can add some paenlties to player for overloaded inventory like slow movement, slow attackSpeed, not able to climb etc.
         } else if (currentWeight >= maxWeight * 0.75f) {
             weightStage = WeightStage::NEAR_FULL;
+            //here also can add some penalties like slow movement(comparitivly faster than overloaded), slow attackSpeed,  etc.
         } else {
             weightStage = WeightStage::NORMAL;
         }
@@ -77,7 +79,14 @@ namespace Inventory{
     }
 
     //getList of item of specific type (ex.. if you want to sort all weapons)
-    std::vector<int> Inventory::getItemByType(Item::ItemType type) const
+    std::vector<std::shared_ptr<Item::Item>> Inventory::getItemByType(Item::ItemType type) const
     {
+        std::vector<std::shared_ptr<Item::Item>> items;
+        for (auto& i : itemList) {
+            if (i.second->getItem()->getType() == type) {
+                items.push_back(i.second->getItem());
+            }
+        }
+        return items;
     }
 }
