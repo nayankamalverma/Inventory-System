@@ -10,6 +10,11 @@ namespace Item
         return name;
     }
 
+    std::string Item::getDescription() const
+    {
+        return description;
+    }
+
     float Item::getWeight() const
     {
         return weight;
@@ -18,5 +23,10 @@ namespace Item
     ItemType Item::getType() const
     {
         return type;
+    }
+
+    ItemRarity Item::getRarity() const
+    {
+        return rarity;
     }
 }
