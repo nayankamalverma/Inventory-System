@@ -32,8 +32,8 @@ namespace Item
             unsigned short maxStack;
 
         public:
-            Item(const std::string& name, float weight, ItemRarity rarity = ItemRarity::Common);
-            virtual ~Item() ;
+            Item(const std::string& name,const std::string& description, float weight, ItemRarity rarity, ItemType type, unsigned short maxStack);
+            virtual ~Item() =default;
 
             const std::string& getName() const;     
             const std::string& getDescription() const;
