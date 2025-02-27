@@ -1,34 +1,52 @@
 #include "Inventory.hpp"
+#include "InventorySlot.hpp"
 
 namespace Inventory{
-    Inventory::Inventory(double maxWeight): maxWeight(maxWeight), currentWeight(0.0){
+    Inventory::Inventory(double maxWeight): maxWeight(maxWeight), currentWeight(0.0), weightStage(WeightStage::NORMAL){}
+
+    Inventory::~Inventory()
+    {
+        clearInventory();
+    }
+
+    void Inventory::clearInventory()
+    {
+        itemList.clear();
+        currentWeight = 0.0;
         updateWeightStage();
     }
 
-    bool Inventory::addItem(const Item::Item& item)
+    bool Inventory::addItem(const std::shared_ptr<Item::Item>& item, int quantity)
     {
+        if(quantity <= 0)   return false;
+        double addedWeight = item->getWeight() * quantity;
         // check if not overloaded then itemWeight +current should not go above max Weight (i.e. in case of near full)
-        if(weightStage!= WeightStage::OVERLOADED && currentWeight + item.getWeight() > maxWeight)
+        if(weightStage!= WeightStage::OVERLOADED && currentWeight + addedWeight > maxWeight)
         {
             return false;
         }
-        items.push_back(item);
-        currentWeight += item.getWeight();
+        // check if item already exists in inventory
+        auto slot = itemList.find(item->getName());
+        if (slot != itemList.end()) {// Item found
+            slot->second->AddItem(quantity);
+        } else { // Item not found. Create a new slot
+            itemList[item->getName()] = std::make_shared<InventorySlot>(item, quantity);
+        }
+        currentWeight += addedWeight;
         updateWeightStage();
-        return true;
+        return true; 
     }
 
-    bool Inventory::removeItem(const std::string& name)
+    bool Inventory::removeItem(const std::string& name, int quantity)
     {
-        for(int i = 0; i < items.size(); i++)
-        {
-            if(items[i].getName() == name)
-            {
-                currentWeight -= items[i].getWeight();
-                items.erase(items.begin() + i);
-                updateWeightStage();
-                return true;
-            }
+        if(quantity <= 0)   return false;
+        auto i = itemList.find(name);
+        if (i != itemList.end() && i->second->getQuantity() <= quantity) {
+            currentWeight -= i->second->getQuantity() * i->second->getItem()->getWeight();
+            i->second->RemoveItem(quantity);
+            updateWeightStage();
+            if(i->second->getQuantity() == 0) {itemList.erase(i);}                
+            return true;
         }
         return false;
     }
@@ -61,15 +79,5 @@ namespace Inventory{
     //getList of item of specific type (ex.. if you want to sort all weapons)
     std::vector<int> Inventory::getItemByType(Item::ItemType type) const
     {
-        std::vector<int> indexes;
-        for(int i = 0; i < items.size(); i++)
-        {
-            if(items[i].getType() == type)
-            {
-                indexes.push_back(i);
-            }
-        }
-        return indexes;
     }
-
 }

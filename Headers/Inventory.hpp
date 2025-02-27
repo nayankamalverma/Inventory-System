@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
-#include "Item.hpp"
+#include <unordered_map>
+#include "InventorySlot.hpp"
 
 namespace Inventory {
 
@@ -13,19 +14,20 @@ namespace Inventory {
     class Inventory
     {
         private:
-            std::vector<Item::Item> items;
+            std::unordered_map<std::string, std::shared_ptr<InventorySlot>> itemList;
             double maxWeight;
             double currentWeight;
             WeightStage weightStage;
-
+            
+            void updateWeightStage();
         public:
             Inventory(double maxWeight);
             virtual ~Inventory();
 
-            bool addItem(const Item::Item& item);
-            bool removeItem(const std::string& name);
+            void clearInventory();
+            bool addItem(const std::shared_ptr<Item::Item>& item, int quantity = 1);
+            bool removeItem(const std::string& name, int quantity = 1);
             WeightStage getWeightStage() const;
-            void updateWeightStage();
             double getCurrentWeight() const;
             double getMaxWeight() const;
             std::vector<int> getItemByType(Item::ItemType type) const;

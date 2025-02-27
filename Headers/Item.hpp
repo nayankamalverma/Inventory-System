@@ -29,15 +29,20 @@ namespace Item
             float weight;
             ItemType type;
             ItemRarity rarity;
+            unsigned short maxStack;
 
         public:
-            Item(std::string& name, float weight);
-            virtual ~Item();
+            Item(const std::string& name, float weight, ItemRarity rarity = ItemRarity::Common);
+            virtual ~Item() ;
 
-            std::string getName() const;
-            std::string getDescription() const;
-            float getWeight() const;
-            ItemType getType() const;
+            const std::string& getName() const;     
+            const std::string& getDescription() const;
+            float getWeight() const;             
+            void SetType(ItemType type);
+            ItemType getType() const; 
+            void SetRarity(ItemRarity rarity);
             ItemRarity getRarity() const;
+            void SetMaxStack(unsigned short maxStack);
+            unsigned short getMaxStack() const;
     };
 }
