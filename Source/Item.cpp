@@ -3,8 +3,8 @@
 
 namespace Item
 {
-    Item::Item(const std::string& name,const std::string& description, float weight, ItemRarity rarity, ItemType type, uint16_t maxStack): name(name), description(description), weight(weight), type(type), rarity(rarity), maxStack(maxStack)
-    {     
+    Item::Item(const std::string& name,const std::string& description, float weight, ItemType type, ItemRarity rarity, uint16_t maxStack): name(name), description(description), weight(weight), type(type), rarity(rarity), maxStack(maxStack)
+    {
     }
 
 

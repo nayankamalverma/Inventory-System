@@ -2,13 +2,13 @@
 #include "Item.hpp"
 
 namespace Item {
-    class  postion : public Item
+    class  Postion : public Item
     {
         private:
             int health;
         public:
-            postion(const std::string& name, float weight,ItemRarity rarity,unsigned short maxStack, int health);
-            virtual ~postion() = default;
+            Postion(const std::string& name,const std::string& description, float weight,ItemRarity rarity, unsigned short maxStack, int health);
+            virtual ~Postion() = default;
 
             int getHealth() const;
     };

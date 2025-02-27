@@ -3,7 +3,7 @@
 
 namespace Item
 {
-    enum ItemType
+    enum class ItemType
     {
         Armor,
         Weapon,
@@ -12,7 +12,7 @@ namespace Item
         Treasure,
     };
 
-    enum ItemRarity
+    enum class ItemRarity
     {
         Common,
         Uncommon,
@@ -32,8 +32,8 @@ namespace Item
             unsigned short maxStack;
 
         public:
-            Item(const std::string& name,const std::string& description, float weight, ItemRarity rarity, ItemType type, unsigned short maxStack);
-            virtual ~Item() =default;
+            Item(const std::string& name, const std::string& description, float weight, ItemType type, ItemRarity rarity, unsigned short maxStack);
+            virtual ~Item() = default;
 
             const std::string& getName() const;     
             const std::string& getDescription() const;

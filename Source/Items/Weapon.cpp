@@ -1,7 +1,7 @@
 #include "Weapon.hpp"`
 
 namespace Item{
-    Weapon::Weapon(const std::string& name,const std::string& description, float weight,ItemRarity rarity, unsigned short maxStack, int damage, float range,float criticalChance, float durability): Item(name,description, weight,rarity,ItemType::Weapon,maxStack), damage(damage), range(range), criticalChance(criticalChance), durability(durability){
+    Weapon::Weapon(const std::string& name,const std::string& description, float weight,ItemRarity rarity, unsigned short maxStack, int damage, float range,float criticalChance, float durability): Item(name,description, weight,ItemType::Weapon,rarity,maxStack), damage(damage), range(range), criticalChance(criticalChance), durability(durability){
     }
 
     int Weapon::getDamage() const

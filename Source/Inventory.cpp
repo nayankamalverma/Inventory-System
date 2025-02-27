@@ -78,6 +78,15 @@ namespace Inventory{
         return maxWeight;
     }
 
+    std::shared_ptr<InventorySlot> Inventory::getItem(const std::string& name) const
+    {
+        auto i = itemList.find(name);
+        if (i != itemList.end()) {
+            return i->second;
+        }
+        return nullptr;
+    }
+
     //getList of item of specific type (ex.. if you want to sort all weapons)
     std::vector<std::shared_ptr<Item::Item>> Inventory::getItemByType(Item::ItemType type) const
     {
