@@ -38,11 +38,11 @@ namespace Item
             const std::string& getName() const;     
             const std::string& getDescription() const;
             float getWeight() const;             
-            void SetType(ItemType type);
+            void setType(ItemType type);
             ItemType getType() const; 
-            void SetRarity(ItemRarity rarity);
+            void setRarity(ItemRarity rarity);
             ItemRarity getRarity() const;
-            void SetMaxStack(unsigned short maxStack);
+            void setMaxStack(unsigned short maxStack);
             unsigned short getMaxStack() const;
     };
 }

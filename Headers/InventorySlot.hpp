@@ -17,7 +17,7 @@ namespace Inventory {
 
         const std::shared_ptr<Item::Item>& getItem() const;  
         int getQuantity() const;
-        void AddItem(int quantity=1);
-        void RemoveItem(int quantity=1);
+        void addItem(int quantity=1);
+        void removeItem(int quantity=1);
     };
 }

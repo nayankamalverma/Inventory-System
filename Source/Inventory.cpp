@@ -20,7 +20,7 @@ namespace Inventory{
     {
         if(quantity <= 0)   return false;
         double addedWeight = item->getWeight() * quantity;
-        // check if not overloaded then itemWeight +current should not go above max Weight (i.e. in case of near full)
+        // check is inventory not overloaded and addeditemWeight + current should not go above max Weight (i.e. in case of near full)
         if(weightStage!= WeightStage::OVERLOADED && currentWeight + addedWeight > maxWeight)
         {
             return false;
@@ -28,7 +28,7 @@ namespace Inventory{
         // check if item already exists in inventory
         auto slot = itemList.find(item->getName());
         if (slot != itemList.end()) {// Item found
-            slot->second->AddItem(quantity);
+            slot->second->addItem(quantity);
         } else { // Item not found. Create a new slot
             itemList[item->getName()] = std::make_shared<InventorySlot>(item, quantity);
         }
@@ -43,7 +43,7 @@ namespace Inventory{
         auto i = itemList.find(name);
         if (i != itemList.end() && i->second->getQuantity() <= quantity) {
             currentWeight -= i->second->getQuantity() * i->second->getItem()->getWeight();
-            i->second->RemoveItem(quantity);
+            i->second->removeItem(quantity);
             updateWeightStage();
             if(i->second->getQuantity() == 0) {itemList.erase(i);}                
             return true;

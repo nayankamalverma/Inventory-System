@@ -24,7 +24,7 @@ namespace Item
         return weight;
     }
 
-    void Item::SetType(ItemType type)
+    void Item::setType(ItemType type)
     {
         this->type = type;
     }
@@ -33,7 +33,7 @@ namespace Item
         return type;
     }
 
-    void Item::SetRarity(ItemRarity rarity)
+    void Item::setRarity(ItemRarity rarity)
     {
         this->rarity = rarity;
     }
@@ -43,7 +43,7 @@ namespace Item
         return rarity;
     }
 
-    void Item::SetMaxStack(unsigned short maxStack)
+    void Item::setMaxStack(unsigned short maxStack)
     {
         this->maxStack = maxStack;
     }

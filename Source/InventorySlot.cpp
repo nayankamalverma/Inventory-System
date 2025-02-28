@@ -13,7 +13,7 @@ namespace Inventory{
         return quantity;
     }
 
-    void InventorySlot::AddItem(const int quantity)
+    void InventorySlot::addItem(const int quantity)
     {
         if (quantity <= 0)
         {
@@ -30,7 +30,7 @@ namespace Inventory{
         }
     }
 
-    void InventorySlot::RemoveItem(int quantity)
+    void InventorySlot::removeItem(int quantity)
     {
         int newQuantity = this->quantity - quantity;
         if(newQuantity < 0 || newQuantity == 0)
